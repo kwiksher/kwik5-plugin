@@ -2,16 +2,18 @@ local M = {}
 --
 local widget = require("widget")
 local app = require "Application"
+
+
 --
 function M:createButton(UI)
   local sceneGroup = UI.sceneGroup
   local layerName = self.properties.target
   local obj = sceneGroup[layerName]
   local props = self.properties
-  -- print(self.properties.target, props.type, props.eventType)
-  if props.type ~= "group" and props.eventType == "touch"   then
+  print(self.properties.target, props.type, props.type)
+  if props.type ~= "group" and props.type == "touch"   then
       local function onReleaseHandler(event)
-        -- print("onReleaseHandler")
+         print("onReleaseHandler")
           if event.target.enabled == nil or event.target.enabled then
               event.target.type = "touch"
               if self.TV then
@@ -30,6 +32,9 @@ function M:createButton(UI)
 
       local path1 =  UI.props.imgDir ..UI.page.."/"..self.layerProps.name.."."..self.layerProps.type
       local path2 =  UI.props.imgDir ..UI.page.."/"..props.over..".png"
+
+      print(path1)
+      print(path2)
 
       if path1 and path2 then
         -- print("------- widget.newButton")
@@ -113,11 +118,12 @@ function M:addEventListener(UI)
     local layerName = props.target
 
     -- Tap
-    if props.eventType  == "tap" and props.btaps and sceneGroup[layerName] then
+    if props.type  == "tap" and props.btaps and sceneGroup[layerName] then
+      print("Tap btaps", props.btaps)
         --
         local obj = sceneGroup[layerName]
         local eventName = actions.onTap
-        -- print(layerName, obj)
+        print(layerName, obj)
         if obj.tap == nil then
           function obj:tap(event)
             -- print("tap")
