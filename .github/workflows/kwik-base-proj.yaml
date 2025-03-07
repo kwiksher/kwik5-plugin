@@ -36,8 +36,10 @@ jobs:
           git add -f UXP/kwik-exporter/kwik/base-proj/Solar2D/plugin/kwik/template/*
           git commit -m "Update kwik exporter kwik/base-proj/Solar2D/plugin/kwik/template"
 
-      - name: Push to Repository kwik5-project-template
-        run: |
-          cd kwik5-project-template
-          git remote set-url origin https://x-access-token:${{ secrets.API_TOKEN_GITHUB }}@github.com/kwiksher/kwik5-project-template.git
-          git push
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.API_TOKEN_GITHUB }}
+          branch: develop
+          directory: kwik5-project-template
+          repository: kwiksher/kwik5-project-template
