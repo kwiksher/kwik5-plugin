@@ -6,8 +6,6 @@ on:
     - main
   workflow_dispatch:
 
-env:
-
 jobs:
   deploy-to-kwik5-project-template:
     runs-on: ubuntu-latest
