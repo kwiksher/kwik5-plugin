@@ -1,0 +1,44 @@
+name: "Deploy Kwik Solar2D base-proj"
+
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+
+env:
+
+jobs:
+  deploy-to-kwik5-project-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Clone Repository kwik5-project-template
+        uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+        with:
+          depth: 1
+          branch: 'develop'
+          owner: 'kwiksher'
+          repository: 'kwik5-project-template'
+
+      - name: List files
+        run: |
+          cp -rf Solar2D/plugin/kwik/template kwik5-project-template/UXP/kwik-exporter/kwik/base-proj/Solar2D/plugin/kwik
+          cd kwik5-project-template
+          git config --global user.email "yamamoto@kwiksher.com"
+          git config --global user.name "kwiksher"
+          git add -f UXP/kwik-exporter/kwik/base-proj/Solar2D/plugin/kwik/template/*
+          git commit -m "Update kwik exporter kwik/base-proj/Solar2D/plugin/kwik/template"
+
+      - name: Push to Repository kwik5-project-template
+        run: |
+          cd kwik5-project-template
+          git remote set-url origin https://x-access-token:${{ secrets.API_TOKEN_GITHUB }}@github.com/kwiksher/kwik5-project-template.git
+          git push
