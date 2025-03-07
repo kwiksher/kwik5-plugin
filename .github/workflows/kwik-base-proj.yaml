@@ -28,6 +28,7 @@ jobs:
 
       - name: List files
         run: |
+          mkdir -p kwik5-project-template/UXP/kwik-exporter/kwik/base-proj/Solar2D/plugin/kwik
           cp -rf Solar2D/plugin/kwik/template kwik5-project-template/UXP/kwik-exporter/kwik/base-proj/Solar2D/plugin/kwik
           cd kwik5-project-template
           git config --global user.email "yamamoto@kwiksher.com"
