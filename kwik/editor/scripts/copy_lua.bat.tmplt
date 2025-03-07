@@ -1,0 +1,8 @@
+#cd Solar2D
+cd /Users/ymmtny/Documents/GitHub/kwik-visual-code/test/base-proj/tmp
+
+{{#.}}
+{{.}}
+{{/.}}
+
+exit

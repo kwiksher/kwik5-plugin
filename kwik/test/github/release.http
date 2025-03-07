@@ -1,0 +1,4 @@
+@token={{$dotenv token}}
+
+GET https://api.github.com/repos/kwiksher/kwik5-project-template/releases/latest
+Authorization: token {{token}}
