@@ -1,12 +1,12 @@
-local M = {}
-local current = ...
-local parent = current:match("(.-)[^%.]+$")
-local root = parent:sub(1, parent:len()-1):match("(.-)[^%.]+$")
-local util = require(kwikGlobal.ROOT.."lib.util")
---
-M.name = current
-M.weight = 1
--- M.groupName = nil
+local name = ...
+local parent,           root, M = newModule(name)
+local baseProps        = require(kwikGlobal.ROOT.."editor.parts.baseProps")
+local basePropsControl = require(kwikGlobal.ROOT.."editor.parts.basePropsControl")
+local commandbox       = require(parent.."commandbox")
+local util             = require(kwikGlobal.ROOT.."lib.util")
+local json             = require("json")
+
+
 M.groupName = "rootGroup"
 -- M.x =  display.contentCenterX + 28 -- UI.editor.viewStore.actionCommandTable.left + UI.editor.viewStore.actionCommandTable.width -- commandbox.x + option.width/2
 -- M.x = display.contentCenterX + 480/2
@@ -22,14 +22,6 @@ local option, newText = util.newTextFactory{
   height = 20
 }
 
-local commandbox = require(parent.."commandbox")
--- local linkbox   = require(root.."parts.linkbox").new()
----
-local util = require(kwikGlobal.ROOT.."lib.util")
-local json = require("json")
-
-local baseProps = require(kwikGlobal.ROOT.."editor.parts.baseProps")
-local basePropsControl = require(kwikGlobal.ROOT.."editor.parts.basePropsControl")
 
 --
 --- I/F ---

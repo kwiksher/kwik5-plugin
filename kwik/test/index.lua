@@ -10,7 +10,8 @@ local M = {
     local UI = props.UI
     --
     local function set (book, page)
-      if book == UI.book and page:find(UI.page)  then
+      local pagePart = page:match("([^_]+)")
+      if book == UI.book and pagePart == UI.page then
         print("  ", "test."..book..".suite_"..page)
         lunatest.suite("test."..book..".suite_"..page, props)
       end
@@ -42,24 +43,23 @@ local M = {
     set("replacement","web")
 
     -- lunatest.suite("test.book.suite_assets", props)
-    -- lunatest.suite("test.book.suite_page1_page_props", props)
-    -- lunatest.suite("test.book.suite_page1_interactions", props)
-    -- lunatest.suite("test.book.suite_page1_replacements", props)
-    -- lunatest.suite("test.book.suite_page1_animation", props)
-    -- lunatest.suite("test.book.suite_page1_button", props)
-    -- lunatest.suite("test.book.suite_page1_action", props)
-    -- lunatest.suite("test.book.suite_page1_group", props)
-    -- lunatest.suite("test.book.suite_page1_audio", props)
-    -- lunatest.suite("test.book.suite_page1_select_copy_paste", props)
 
-    -- lunatest.suite("test.book.suite_page2_sync2audio", props)
-    -- lunatest.suite("test.book.suite_page3_drag", props)
-    -- lunatest.suite("test.book.suite_page3_button", props)
-    -- lunatest.suite("test.book.suite_page3_animation", props)
+    -- set("kwikTheCat", "page1_page_props")
+    -- set("kwikTheCat", "page1_interactions")
+    -- set("kwikTheCat", "page1_replacements")
+    -- set("kwikTheCat", "page1_animation")
+    -- set("kwikTheCat", "page1_button")
+    -- set("kwikTheCat", "page1_action")
+    -- set("kwikTheCat", "page1_group")
+    -- set("kwikTheCat", "page1_audio")
+    -- set("kwikTheCat", "page1_select_copy_paste")
 
-    -- lunatest.suite("test.book.suite_page4_physics", props)
-
-    --lunatest.suite("test.book.suite_page12_canvas", props)
+    set("kwikTheCat", "page2_sync2audio")
+    set("kwikTheCat", "page3_drag")
+    set("kwikTheCat", "page3_button")
+    set("kwikTheCat", "page3_animation")
+    set("kwikTheCat", "page4_physics")
+    set("kwikTheCat", "page12_canvas")
 
     -- lunatest.suite("test.book.suite_new_book_page_layer", props)
     -- lunatest.suite("test.book.suite_new_shape_transform", props)

@@ -7,7 +7,7 @@ function _Class:setMod(class, layer, custom)
   if class then
     fileName = layer .."_"..class
   end
-  print("######", self.pathMod..fileName)
+  -- print("######", self.pathMod..fileName)
   self.mod = require(self.pathMod..fileName)
 end
 --

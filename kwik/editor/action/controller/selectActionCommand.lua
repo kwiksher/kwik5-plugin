@@ -5,12 +5,10 @@ local libUtil = require(kwikGlobal.ROOT.."lib.util")
 
 
 local name = ...
-local parent = name:match("(.-)[^%.]+$")
-local root = parent:sub(1, parent:len()-1):match("(.-)[^%.]+$")
 
-local actionCommandButtons = require(root.."actionCommandButtons")
-local buttons = require(root.."buttons")
-local commandbox = require(root.."commandbox")
+local actionCommandButtons = require(kwikGlobal.ROOT.."editor.action.actionCommandButtons")
+local buttons = require(kwikGlobal.ROOT.."editor.action.buttons")
+local commandbox = require(kwikGlobal.ROOT.."editor.action.commandbox")
 local commandModel = require(kwikGlobal.ROOT.."template.commands.model").commands
 local selectors = require(kwikGlobal.ROOT.."editor.parts.selectors")
 --

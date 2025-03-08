@@ -1,11 +1,11 @@
 local name = ...
-local parent,root, M = newModule(name)
+local parent, root, M = newModule(name)
 -- attach drag-item scrollview to widget library
-local dragItemScrollView = require(kwikGlobal.ROOT.."extlib.dragitemscrollview")
-local widget = require("widget")
+local dragItemScrollView         = require(kwikGlobal.ROOT.."extlib.dragitemscrollview")
 local actionCommandTableListener = require(parent.."actionCommandtableListener")
-local util = require(kwikGlobal.ROOT.."lib.util")
-local buttonContext = require(parent.."buttonCommandContext")
+local buttonContext              = require(parent.."buttonCommandContext")
+local util                       = require(kwikGlobal.ROOT.."lib.util")
+local widget                     = require("widget")
 
 M.top = display.contentCenterY-- 22
 M.left = nil

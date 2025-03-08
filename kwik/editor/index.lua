@@ -255,7 +255,7 @@ function M:init(UI)
 
   ------
   -- asset tool
-  print("@@@@@@@@@@",parent .. assetTool.id .. ".index")
+  -- print("@@@@@@@@@@",parent .. assetTool.id .. ".index")
   local mod = require(parent .. assetTool.id .. ".index")
   mod.name = mod.name or assetTool.id
   self.views[#self.views + 1] = mod

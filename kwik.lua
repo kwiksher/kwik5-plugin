@@ -218,14 +218,11 @@ lib.setCustomModule = function(pathMod, props)
   lib.pageCommond = require("plugin.kwik.components.bookstore.controller.pageCommand")
   lib.model = require("plugin.kwik.components.bookstore.model.base")
 -- -- lib.lib.util = require("lib.util")
-
-  print("------------- ######### ",path)
   -- package.path = package.path .. ";" .. path .. "/?.lua;"
 
   lib.common = props
   require("plugin.kwik.controller.commonComponentHandler").pathMod = pathMod .. ".components."
   require("plugin.kwik.controller.ApplicationContext").pathMod = pathMod .. ".commands."
-
 
   for i, name in next, props.components do
     print(pathMod..".components."..name)

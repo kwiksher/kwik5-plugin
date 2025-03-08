@@ -10,8 +10,8 @@ function M:createButton(UI)
   local layerName = self.properties.target
   local obj = sceneGroup[layerName]
   local props = self.properties
-  print(self.properties.target, props.type, props.type)
-  if props.type ~= "group" and props.type == "touch"   then
+  -- print(self.properties.target, props.eventType)
+  if props.type ~= "group" and props.eventType == "touch"   then
       local function onReleaseHandler(event)
          print("onReleaseHandler")
           if event.target.enabled == nil or event.target.enabled then
@@ -118,12 +118,12 @@ function M:addEventListener(UI)
     local layerName = props.target
 
     -- Tap
-    if props.type  == "tap" and props.btaps and sceneGroup[layerName] then
-      print("Tap btaps", props.btaps)
+    if props.eventType  == "tap" and props.btaps and sceneGroup[layerName] then
+      -- print("Tap btaps", props.btaps)
         --
         local obj = sceneGroup[layerName]
         local eventName = actions.onTap
-        print(layerName, obj)
+        -- print(layerName, obj)
         if obj.tap == nil then
           function obj:tap(event)
             -- print("tap")

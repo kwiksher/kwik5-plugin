@@ -5,20 +5,22 @@ local UI
 local bookTable
 local pageTable
 local layerTable
-local actionTable = require("editor.action.actionTable")
-local actionCommandTable = require("editor.action.actionCommandTable")
-local actionCommandPropsTable = require("editor.action.actionCommandPropsTable")
-local actionEditor = require("editor.action.index")
-local colorPicker = require("extlib.colorPicker")
-local classProps = require("editor.parts.classProps")
-local actionbox = require("editor.parts.actionbox")
+
+local parent                  = kwikGlobal.ROOT.."editor."
+local actionTable             = require(parent.."action.actionTable")
+local actionCommandTable      = require(parent.."action.actionCommandTable")
+local actionCommandPropsTable = require(parent.."action.actionCommandPropsTable")
+local actionEditor            = require(parent.."action.index")
+local colorPicker             = require(kwikGlobal.ROOT.."extlib.colorPicker")
+local classProps              = require(parent.."parts.classProps")
+local actionbox               = require(parent.."parts.actionbox")
 ----
-local buttons = require("editor.action.buttons")
-local actionCommandButtons = require("editor.action.actionCommandButtons")
+local buttons              = require(parent.."action.buttons")
+local actionCommandButtons = require(parent.."action.actionCommandButtons")
 ----
-local helper = require("test.helper")
-local picker = require("editor.picker.name")
-local actionButtonContext = require("editor.action.buttonContext")
+local helper              = require(kwikGlobal.ROOT.."test.helper")
+local picker              = require(parent.."picker.name")
+local actionButtonContext = require(parent.."action.buttonContext")
 
 function M.init(props)
   selectors = props.selectors
@@ -146,6 +148,16 @@ function M.xtest_modify_action_add_extcode()
   end
 end
 
+function M.test_modify_action_back()
+  helper.selectIcon("action")
+  if helper.hasObj(actionTable, "back") then
+    helper.clickAction("back")
+    actionTable.editButton:tap()
+    -- helper.singelClick(actionCommandTable, "canvas.brush")
+  end
+end
+
+
 --
 function M.xtest_get_action()
   helper.selectIcon("action")
@@ -253,7 +265,7 @@ function M.xtest_new_brush_color_buttons_at_once()
   -- each onTap is attached with action brush{Black, Blue, Red, ...}
 end
 
-function M.xtest_edit_button()
+function M.xtest_edit_button_color8()
   helper.selectLayer("color8", "button", false) -- isRightClick
   helper.selectLayer("color8", "button", true) -- isRightClick
 

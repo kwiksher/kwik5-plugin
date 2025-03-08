@@ -15,7 +15,6 @@ function M:setActiveEntry(obj)
 end
 
 function M:drawRect()
-  print("@@@@@@@@@@")
   if self.onDraw then return end
   self.onDraw = true
   popup:create(self)

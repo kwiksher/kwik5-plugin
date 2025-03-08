@@ -87,7 +87,7 @@ function M:take(title, pmsg, shutter, hideLayers)
     end)
 	:fail(function()
 	    print("fail")
-	    native.showAlert( "Corona", "Request permission is not granted on "..system.getInfo("model"), { "OK" } )
+	    native.showAlert( "App", "Request permission is not granted on "..system.getInfo("model"), { "OK" } )
     end)
 end
 --

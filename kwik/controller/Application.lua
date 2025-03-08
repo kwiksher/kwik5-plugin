@@ -250,7 +250,7 @@ function M.loadPage(UI)
   else
     local sceneIndex = require( "App."..bookName..".index")
     if path == nil then
-      print("##########", bookName)
+      print("# path is empty", bookName)
       return
     end
     local success = lfs.chdir( path ) -- isDir works with current dir

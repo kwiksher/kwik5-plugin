@@ -1,9 +1,9 @@
 local name = ...
-local parent,root, M = newModule(name)
-local actionTableListener = require(parent.."actionTableListener")
-local buttonContext = require(parent.."buttonContext")
--- local layerTableCommands = require(kwikGlobal.ROOT.."editor.parts.layerTableCommands")
-local util = require(kwikGlobal.ROOT.."lib.util")
+local parent,                   root, M = newModule(name)
+local actionTableListener      = require(parent.."actionTableListener")
+local buttonContext            = require(parent.."buttonContext")
+--    local layerTableCommands = require(kwikGlobal.ROOT.."editor.parts.layerTableCommands")
+local util                     = require(kwikGlobal.ROOT.."lib.util")
 --
 -- local actionbox = require(root.."parts.actionbox")
 -- local buttons = require(parent.."buttons")

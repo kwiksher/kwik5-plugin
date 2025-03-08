@@ -1,9 +1,9 @@
 local name = ...
-local parent,root = newModule(name)
-local M = require(kwikGlobal.ROOT.."editor.parts.baseBox").new()
+local parent, root = newModule(name)
+local M      = require(kwikGlobal.ROOT.."editor.parts.baseBox").new()
 local shapes = require(kwikGlobal.ROOT.."extlib.shapes")
+local util   = require(kwikGlobal.ROOT.."lib.util")
 local widget = require( "widget" )
-local util = require(kwikGlobal.ROOT.."lib.util")
 
 M.name = name
 M.x = display.contentCenterX*0.5
@@ -112,7 +112,7 @@ end
 --
 function M:create(UI)
   self.UI = UI
-  -- print("--------------------- commandbox ------------")
+  print("--------------------- commandbox ------------")
   -- singleton. destroy with composer is delayed, it causes to free created objects
   -- if  viewStore.commandbox then return end
   --

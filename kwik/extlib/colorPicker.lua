@@ -89,7 +89,7 @@ local function boxTouch(event)
 	local target = event.target
 	local x, y = colorBox:contentToLocal(event.x, event.y)
 
-  print("#####"..(event.phase or ""), event.x, event.y)
+  -- print("#####"..(event.phase or ""), event.x, event.y)
 
 	if x < -boxSize*.5 then
 		x = -boxSize*.5

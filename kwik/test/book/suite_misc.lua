@@ -39,7 +39,6 @@ local wildcard= require("extlib.wildcard")
 -- Not possible to combine single char wildcard(s) "?" with multi char wildcard(s) "*"
 function M.xtest_wtildCardedString()
   local test = "/page1/test.png"
-  print("@@@@@@@@@@@@")
   print(wildcard.matchesWildCardedString(test, '?page1*')) -- false
   print(wildcard.matchesWildCardedString(test, '*page*'))
   print(wildcard.matchesWildCardedString(test, '*.png'))

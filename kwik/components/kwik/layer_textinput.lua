@@ -124,7 +124,6 @@ function M:didShow(UI)
       end
       --
       if props.dynamicText:len() > 0 then
-        print("##########")
         local target = sceneGroup[props.dynamicText]
         if target then
           target.text = value
