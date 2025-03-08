@@ -1,5 +1,4 @@
 local _M = {}
-print("@@@@@", "commands.kwik.actionCommand")
 local ActionCommand = {}
 ActionCommand.Layer = require("commands.kwik.layerAction")
 ActionCommand.Page = require("commands.kwik.pageAction")

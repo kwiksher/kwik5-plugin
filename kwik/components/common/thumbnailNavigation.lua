@@ -1,5 +1,5 @@
 local M = {}
-local navigation = require(kwikGlobal.ROOT.."extlib.kNavi")
+local navigation = require(kwikGlobal.ROOT.."custom.page_navigation")
 local shapes     = require(kwikGlobal.ROOT.."extlib.shapes")
 
 local navigationProps = { bookFree = {
@@ -31,7 +31,7 @@ function M:create(UI)
     local obj = navigation.new(props, naviListener)
     --
     sceneGroup:insert(obj.group)
-    self.kNavi = obj
+    self.obj = obj
 
     -- self.triangle = shapes.triangle.equi( display.contentCenterX, (display.actualContentHeight - 1280/4)/2 - 10, 20 )
     self.triangle = shapes.triangle.equi( 0,320/2, 20 )
@@ -39,7 +39,7 @@ function M:create(UI)
     self.triangle:rotate(180)
     self.triangle:setFillColor(1,1,0)
     self.triangle.tap = function(event)
-      self.kNavi:show()
+      self.obj:show()
       return true
     end
     sceneGroup:insert(self.triangle)
@@ -47,8 +47,8 @@ function M:create(UI)
 end
 --
 function M:didShow(UI)
-  if self.kNavi then
-    self.kNavi:hide()
+  if self.obj then
+    self.obj:hide()
     if self.triangle and self.triangle.addEventListener then
       self.triangle:addEventListener("tap", self.triangle)
     end
@@ -56,7 +56,7 @@ function M:didShow(UI)
 end
 --
 function M:didHide(UI)
-  if self.kNavi and self.tiangle then
+  if self.obj and self.tiangle then
     self.triangle:removeEventListener("tap", self.triangle)
   end
 end

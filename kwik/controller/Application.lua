@@ -289,11 +289,17 @@ function M.new(Props)
     --
     M.apps[#M.apps+1] = app
 
---
+   -- viewName == "components"..page...".index"
     function app:showView(viewName, _options)
         -- print(debug.traceback())
         -- print("-------------- showView ------------------", self.props.appName.."."..viewName, ", currentViewName:", self.currentViewName)
         if self.scene and self.scene.UI.editor then
+            for i, v in next, self.scene.UI.timers do
+              timer.cancel(v)
+            end
+            for i, v in next, self.scene.UI.animations do
+              v:pause()
+            end
             self.scene.UI.editor:destroy()
         end
 
@@ -313,6 +319,28 @@ function M.new(Props)
         options.params.sceneProps = {app =scene.app, classType = scene.classType, UI = scene.UI, model=scene.model, getCommands = scene.getCommands}
         composer.gotoScene("App."..self.props.appName.."."..viewName, options)
     end
+    --
+    function app:autoPlay(delay, _options)
+      local scene
+      for i, v in next, app.props.scenes do
+        if v == self.scene.UI.page then
+           if i == #app.props.scenes then
+            scene = app.props.scenes[1]
+           else
+            scene = app.props.scenes[i+1]
+           end
+           break
+        end
+      end
+      app.autoPlayTimer = timer.performWithDelay(delay*1000, function()
+          app:showView("components."..scene..".index", _options)
+      end, -1)
+    end
+    --
+    function app:autoPlayCancel()
+      timer.cancel(app.autoPlayTimer)
+    end
+
     --
     function app:showOverlay(viewName, _options)
       print("showView", viewName, ", currentViewName:", self.currentViewName)

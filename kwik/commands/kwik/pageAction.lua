@@ -1,51 +1,83 @@
--- Code created by Kwik - Copyright: kwiksher.com {{year}}
--- Version: {{vers}}
--- Project: {{ProjName}}
---
-local _M = {}
-local _K = require(kwikGlobal.ROOT.."controller.Application")
+local M = {}
+local Application = require(kwikGlobal.ROOT.."controller.Application")
+local Navigation = require("custom.components.page_navigation")
 local composer = require("composer")
-local Navigation = require(kwikGlobal.ROOT.."extlib.kNavi")
 --
-function _M:autoPlay(curPage)
-    if nil~= composer.getScene("views.page0"..(curPage+1).."Scene" ) then
-    	composer.removeScene( "views.page0"..(curPage+1).."Scene"  , true)
-    end
-   composer.gotoScene( "views.page0"..(curPage+1).."Scene"  )
+function M:autoPlay(ptrans, delay, _time)
+  local options = {}
+  local app = Application.get()
+  if ptrans and ptrans ~="" then
+    options =  { effect = ptrans,  time= _time}
+ end
+ app:autoPlay(delay, options)
 end
+
+function M:autoPlayCancel()
+  local app = Application.get()
+  app:autoPlayCacnel()
+end
+
 --
-function _M:showHideNavigation()
-  if (_K.kNavig.alpha == 0) then
+function M:showHideNavigation()
+  if not Navigation.isVisible then
      Navigation.show()
   else
      Navigation.hide()
   end
 end--
 --
-function _M:reloadPage(canvas)
+function M:reloadPage(canvas)
 	if canvas then
-   _K.reloadCanvas = 0
+   app.reloadCanvas = 0
 	end
-	composer.gotoScene("extlib.page_reload")
+	composer.gotoScene("custom.commands.page_reload")
 end
 --
---
-function _M:gotoPage(pnum, ptrans, delay, _time)
-  local myClosure_switch= function()
-      if nil~= composer.getScene("views.page0"..pnum.."Scene") then
-          composer.removeScene("views.page0"..pnum.."Scene", true)
-        end
-      if ptrans and ptrans ~="" then
-         composer.gotoScene( "views.page0"..pnum.."Scene", { effect = ptrans,  time= _time} )
-      else
-         composer.gotoScene( "views.page0"..pnum.."Scene" )
+function M:gotoPage(pageName, ptrans, delay, _time)
+  local app = Application.get()
+  local options = {}
+  local scene = app.scene.UI.page
+  if pageName == "previous" then
+    for i, v in next, app.props.scenes do
+      if v == self.scene.UI.page then
+         if i == 1 then
+          scene = app.props.scenes[#app.props.scenes]
+         else
+          scene = app.props.scenes[i-1]
+         end
+         break
       end
+    end
+  elseif pageName == "next" then
+    for i, v in next, app.props.scenes do
+      if v == self.scene.UI.page then
+         if i == #app.props.scenes then
+          scene = app.props.scenes[1]
+         else
+          scene = app.props.scenes[i+1]
+         end
+         break
+      end
+    end
+  else
+    scene = pageName
+  end
+  ---
+  local myClosure_switch= function()
+      -- if nil~= composer.getScene("views.page0"..pnum.."Scene") then
+      --    composer.removeScene("views.page0"..pnum.."Scene", true)
+      -- end
+      if ptrans and ptrans ~="" then
+         options =  { effect = ptrans,  time= _time}
+      end
+      app:showview("components"..scene..".index", options)
   end
   if delay > 0 then
-    _K.timerStash.pageAction = timer.performWithDelay(delay, myClosure_switch, 1)
+    local t = timer.performWithDelay(delay, myClosure_switch, 1)
+    table.insert(app.scene.UI.timers, t)
   else
     myClosure_switch()
   end
 end
 --
-return _M
+return M

@@ -78,7 +78,7 @@ local composer = require("composer")
 
 local function resetPacakges()
      package.loaded["extlib.syncSound"] = nil
-     package.loaded["extlib.kNavi"] = nil
+     package.loaded["custom.page_navigation"] = nil
      package.loaded["commands.kwik.pageAction"] = nil
      package.loaded["commands.kwik.animationAction"] = nil
      package.loaded["commands.kwik.actionCommand"] = nil
