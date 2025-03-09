@@ -70,16 +70,15 @@ function M:gotoPage(pageName, effect, delay, duration)
       if effect and effect ~="" then
          options =  { effect = effect,  time= duration}
       end
-      print("@@@@@", scene)
-      print(debug.traceback())
+      -- print(debug.traceback())
       app:showView("components."..scene..".index", options)
   end
   if delay > 0 then
-    print("#### gotoPage performWithDelay")
+    -- print("#### gotoPage performWithDelay")
     local t = timer.performWithDelay(delay, myClosure_switch, 1)
     table.insert(app.scene.UI.timers, t)
   else
-    print("#### gotoPage ")
+    -- print("#### gotoPage ")
     myClosure_switch()
   end
 end

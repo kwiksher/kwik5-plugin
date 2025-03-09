@@ -21,6 +21,7 @@ M.new = function(sceneName, model)
     model.page = page
     scene.UI = UI.create(scene, model)
     scene.model = model
+    scene.customCommands = nil
     --
     function scene:setProps (Props)
         self.UI.props = Props
@@ -108,7 +109,8 @@ M.new = function(sceneName, model)
     scene:addEventListener("destroy", scene)
     --
     function scene:getCommands()
-        local commands = {}
+        local commands = self.customCommands or {}
+        -- print("$$$$$$", #commands)
         -- local commands = {"initMenu","printStack",
         --    "layersList.select", "layersList.drag",
         --    "layerProps.new", "layerProps.update","layerProps.attachFile", "layerProps.drag"

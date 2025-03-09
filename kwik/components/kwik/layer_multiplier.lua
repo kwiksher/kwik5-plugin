@@ -25,11 +25,13 @@ function M:didShow(UI)
   if props.enablePhysics then
     physics.start(true)
   end
+
+  -- self:group:toFront()
   --
   local handler = function(count)
     local obj
     -- for k,v in pairs(layerProps) do print(k, v) end
-    if props.enabledWind then
+    if props.enablePhsyics and props.enableWind then
       physics.setGravity(math.random(props.windSpeed * -1, props.windSpeed) / 10, props.gravityY)
     end
     --
@@ -107,7 +109,9 @@ function M:didShow(UI)
       local pweight = math.random(props.weightMin, props.weightMax)
       obj.linearDumping = pweight * obj.xScale
     end
+    obj:toFront()
     self.group:insert(obj)
+    self.group:toFront()
   end
   --
   local function copyHandler()

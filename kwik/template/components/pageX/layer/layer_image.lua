@@ -44,10 +44,14 @@ M.yScale     = {{scaleH}}
 M.rotation   = {{rotation}}
 --
 M.layerAsBg     = {{layerAsBg}}
-M.isSharedAsset = {{kwk}}
 --
 M:setProps(layerProps)
 --
+-- Set isSharedAsset = true, and then set a common module. See kwikTheCatCommon.lua
+--
+M.isSharedAsset = {{kwk}}
+M.imagePath   = "{{page}}/{{parent}}{{name}}.png"
+
 function M:init(UI)
   --local sceneGroup = UI.scene.view
 	if not self.isSharedAsset then
