@@ -21,7 +21,7 @@ M.new = function(appDir, name)
         mediator.name = self.name
         --
         function mediator:onRegister()
-            --print("mediator:onRegister")
+            -- print("mediator:onRegister", self.name)
             local scene = self.viewInstance
             for k, eventName in pairs(self.commands) do
                 --print("", eventName)
@@ -30,6 +30,7 @@ M.new = function(appDir, name)
         end
         --
         function mediator:onRemove()
+          -- print("mediator:onRemove", self.name)
             local scene = self.viewInstance
             for k, eventName in pairs(self.commands) do
                 scene:removeEventListener(eventName, self)
@@ -45,19 +46,21 @@ M.new = function(appDir, name)
         --  then it is redirected to the app:dispatchEvent below
         --
         for k, eventName in pairs(self.commands) do
-			    --print("", self.name, eventName)
+			    -- print("", self.name, eventName)
             mediator[eventName] = function(self, event)
                 local myself = self
-                --print("", myself.name .. "." .. eventName)
+                -- print("", myself.name .. "." .. eventName)
                 --
                 -- addEventListener is set by context:mapCommand
                 --
-                local _event = event.event or event
-                self.viewInstance.app:dispatchEvent{
-                    name = myself.name .. "." .. eventName,
-                    event =_event,
-                    UI = myself.viewInstance.UI
-                }
+                if self.viewInstance.isActive then -- ref scene.lua
+                  local _event = event.event or event
+                  self.viewInstance.app:dispatchEvent{
+                      name = myself.name .. "." .. eventName,
+                      event =_event,
+                      UI = myself.viewInstance.UI
+                  }
+                end
             end
         end
         --

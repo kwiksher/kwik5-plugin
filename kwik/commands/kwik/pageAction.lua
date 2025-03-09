@@ -3,11 +3,11 @@ local Application = require(kwikGlobal.ROOT.."controller.Application")
 local Navigation = require("custom.components.page_navigation")
 local composer = require("composer")
 --
-function M:autoPlay(ptrans, delay, _time)
+function M:autoPlay(effect, delay, duration)
   local options = {}
   local app = Application.get()
-  if ptrans and ptrans ~="" then
-    options =  { effect = ptrans,  time= _time}
+  if effect and effect ~="" then
+    options =  { effect = effect,  time= duration}
  end
  app:autoPlay(delay, options)
 end
@@ -37,9 +37,9 @@ function M:gotoPage(pageName, effect, delay, duration)
   local app = Application.get()
   local options = {}
   local scene = app.scene.UI.page
-  if pageName == "previous" then
+  if pageName == "PREVIOUS" then
     for i, v in next, app.props.scenes do
-      if v == self.scene.UI.page then
+      if v == scene then
          if i == 1 then
           scene = app.props.scenes[#app.props.scenes]
          else
@@ -48,9 +48,9 @@ function M:gotoPage(pageName, effect, delay, duration)
          break
       end
     end
-  elseif pageName == "next" then
+  elseif pageName == "NEXT" then
     for i, v in next, app.props.scenes do
-      if v == self.scene.UI.page then
+      if v == scene then
          if i == #app.props.scenes then
           scene = app.props.scenes[1]
          else
@@ -70,12 +70,16 @@ function M:gotoPage(pageName, effect, delay, duration)
       if effect and effect ~="" then
          options =  { effect = effect,  time= duration}
       end
-      app:showview("components"..scene..".index", options)
+      print("@@@@@", scene)
+      print(debug.traceback())
+      app:showView("components."..scene..".index", options)
   end
   if delay > 0 then
+    print("#### gotoPage performWithDelay")
     local t = timer.performWithDelay(delay, myClosure_switch, 1)
     table.insert(app.scene.UI.timers, t)
   else
+    print("#### gotoPage ")
     myClosure_switch()
   end
 end

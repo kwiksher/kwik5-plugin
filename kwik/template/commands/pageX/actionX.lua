@@ -133,6 +133,18 @@ function ActionCommand:new()
 			AC.Canvas:erase(obj)
 		  {{/erase}}
   {{/canvas}}
+  {{#page.autoPlay}}
+    AC.Page:autoPlay({{effect}}, {{delay}}, {{duration}})
+  {{/page.autoPlay}}
+  {{#page.showHideNavigation}}
+    AC.Page:showHideNavigation({{target}});
+  {{/page.showHideNavigation}}
+  {{#page.reloadPage}}
+    AC.Page:reloadPage({{canvas}});
+  {{/page.reloadPage}}
+  {{#page.gotoPage}}
+    AC.Page:gotoPage("{{pageName}}", "{{effect}}", {{delay}}, {{duration}});
+  {{/page.gotoPage}}
   {{#variable.restartTrackVar}}
    AC.Var:restartTrackVars()
   {{/variable.restartTrackVar}}

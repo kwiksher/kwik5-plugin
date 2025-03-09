@@ -311,6 +311,12 @@ function M.new(Props)
           return
         end
         self.scene = scene
+        --
+        -- why dispathEvent is called twice? we prevent it by isActive as false
+        --
+        self.scene.isActive = false
+        --
+        --
         -- scene.app.currentViewName = viewName
         local options = _options or {}
         options.params = options.params or {time=0}

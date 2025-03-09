@@ -119,14 +119,14 @@ function M:addEventListener(UI)
 
     -- Tap
     if props.eventType  == "tap" and props.btaps and sceneGroup[layerName] then
-      -- print("Tap btaps", props.btaps)
+      print("addEventListener forbtaps", layerName, props.btaps)
         --
         local obj = sceneGroup[layerName]
         local eventName = actions.onTap
         -- print(layerName, obj)
         if obj.tap == nil then
           function obj:tap(event)
-            -- print("tap")
+            print("tap")
             event.UI = UI
             if props.enabled or props.enabled == nil then
               if props.btaps and event.numTaps then

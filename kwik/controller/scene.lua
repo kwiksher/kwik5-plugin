@@ -57,6 +57,7 @@ M.new = function(sceneName, model)
     end
     --
     function scene:show(event)
+        self.isActive = true
         local sceneGroup = self.view
         if event.phase == "will" then
             self.UI:willShow(event.params)
@@ -68,6 +69,7 @@ M.new = function(sceneName, model)
     --
     function scene:hide(event)
         if event.phase == "will" then
+          self.isActive = false
             if event.parent then event.parent.UI:resume() end
             self.UI:didHide(event.params)
         elseif event.phase == "did" then
