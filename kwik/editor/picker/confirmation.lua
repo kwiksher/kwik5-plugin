@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 local util = require(kwikGlobal.ROOT.."lib.util")
 local option, newText = util.newTextFactory {

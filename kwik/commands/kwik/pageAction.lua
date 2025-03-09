@@ -33,7 +33,7 @@ function M:reloadPage(canvas)
 	composer.gotoScene("custom.commands.page_reload")
 end
 --
-function M:gotoPage(pageName, ptrans, delay, _time)
+function M:gotoPage(pageName, effect, delay, duration)
   local app = Application.get()
   local options = {}
   local scene = app.scene.UI.page
@@ -67,8 +67,8 @@ function M:gotoPage(pageName, ptrans, delay, _time)
       -- if nil~= composer.getScene("views.page0"..pnum.."Scene") then
       --    composer.removeScene("views.page0"..pnum.."Scene", true)
       -- end
-      if ptrans and ptrans ~="" then
-         options =  { effect = ptrans,  time= _time}
+      if effect and effect ~="" then
+         options =  { effect = effect,  time= duration}
       end
       app:showview("components"..scene..".index", options)
   end

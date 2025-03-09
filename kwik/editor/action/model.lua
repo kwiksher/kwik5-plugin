@@ -238,8 +238,8 @@ M.commands = {
     showHideNavigation = {},
     reload = {canvas = true},
     gotoPage = {
-      page = "",
-      easing = "",
+      page = "next",
+      effect = "",
       delay = 0,
       duration = 0,
     }

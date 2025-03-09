@@ -42,8 +42,8 @@ function M:createTable(UI, selected)
     top                      = self.top, --self.triangle.contentBounds.yMin,
     left                     = self.left, --self.triangle.contentBounds.xMin - 48,
     width                    = self.width,
-    height                   = #self.model*16,
-    scrollHeight             = #self.model*16,
+    height                   = #self.model*option.height,
+    scrollHeight             = #self.model*option.height,
     verticalScrollDisabled   = false,
     horizontalScrollDisabled = true,
     friction                 = 2,
@@ -143,7 +143,7 @@ function M:create(UI)
     y = self.y,
     fontSize = 10,
   }
-  obj:setFillColor(1, 1, 0 )
+  obj:setFillColor( 0 )
   obj.anchorX = 0
 
   self.selectedText = obj

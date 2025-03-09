@@ -37,7 +37,6 @@ function M:create(UI)
   self:createTable(self.triangle)
 end
 
-
 function M:createTriangle (x, y)
   local triangle = shapes.triangle.equi( x, y, 10 )
   triangle:rotate(120)
@@ -68,6 +67,56 @@ function M:createTriangle (x, y)
     end
   end
   return triangle
+end
+
+
+function M:createRow(index, entry)
+  -- print("createRow", index, entry.name)
+  local triangle = self.triangle
+  local params = self.params
+
+  local group = display.newGroup()
+  -- name
+  option.parent = group
+  option.text   =  entry.name or ""
+  option.x = 42   --labelText.contentBounds.xMin - 100
+  option.y = triangle.contentBounds.yMax + (index-2) * option.height-5
+  --
+  local obj = self.newText(option)
+  obj.name = entry.name
+  obj.class = entry.class
+  obj.index = index
+
+  if params and params.isRect then
+    local rect = display.newRect(group, obj.x, obj.y, obj.width+10, obj.height)
+    rect:setFillColor(0.8)
+    obj.rect = rect
+    group:insert(obj) -- insert again to make it top
+
+  end
+  --
+  -- local field = native.newTextField( scrollView.x + 40, obj.y, 40, 16 )
+  local field = native.newTextField(obj.x, obj.y ,obj.width, obj.height )
+  if type(entry.value) == 'number' then
+    field.inputType = "number"
+  end
+  -- print("createDow", entry.name, entry.value)
+  field.text = entry.value
+  -- field.isVisible = false
+  obj.field = field
+  field.isVisible = false1
+  group:insert(field)
+
+  ---
+  self.scrollView:insert(group)
+  self.objs[index] = obj
+  if self.selectedIndex == index then
+    self.selectedObj = obj
+    self.selectedText.text = obj.class
+    if obj.rect then
+      obj.rect:setFillColor(0,1,0)
+    end
+  end
 end
 
 function M:createTable(params)
@@ -117,54 +166,11 @@ function M:createTable(params)
   ---[[
   option.parent = self.group
 
-  local function createRow(index, entry)
-    -- print("createRow", index, entry.name)
-    local group = display.newGroup()
-    -- name
-    option.parent = group
-    option.text   =  entry.name or ""
-    option.x = 42   --labelText.contentBounds.xMin - 100
-    option.y = triangle.contentBounds.yMax + (index-2) * option.height-5
-    --
-    local obj = self.newText(option)
-    obj.name = entry.name
-    obj.class = entry.class
-    obj.index = index
-
-    if params and params.isRect then
-      local rect = display.newRect(group, obj.x, obj.y, obj.width+10, obj.height)
-      rect:setFillColor(0.8)
-      obj.rect = rect
-      group:insert(obj) -- insert again to make it top
-
-    end
-    --
-    -- local field = native.newTextField( scrollView.x + 40, obj.y, 40, 16 )
-    local field = native.newTextField(obj.x, obj.y ,obj.width, obj.height )
-    if type(entry.value) == 'number' then
-      field.inputType = "number"
-    end
-    -- print("createDow", entry.name, entry.value)
-    field.text = entry.value
-    -- field.isVisible = false
-    obj.field = field
-    field.isVisible = false1
-    group:insert(field)
-
-    ---
-    self.scrollView:insert(group)
-    self.objs[index] = obj
-    if self.selectedIndex == index then
-      self.selectedObj = obj
-      self.selectedText.text = obj.class
-      if obj.rect then
-        obj.rect:setFillColor(0,1,0)
-      end
-    end
-  end
+  self.params = params
+  self.option = option
   --
   for i=1, #model do
-    createRow(i, model[i])
+    self:createRow(i, model[i])
   end
   --
   --scrollView.isVisible = false
@@ -325,6 +331,18 @@ function M:hide()
   end
 end
 
+function M:newInstance(model)
+  local instance = {
+    selectedText = nil,
+    selectedTextLabel = nil, -- class
+    selectedIndex = 1,
+    selectedObj = nil,
+    objs = {},
+    model = model
+  }
+  return setmetatable(instance, {__index=self})
+end
+
 M.new = function(model)
 	local instance = {
     selectedText = nil,
@@ -337,16 +355,5 @@ M.new = function(model)
 	return setmetatable(instance, {__index=M})
 end
 
-M.newInstance = function(self, model)
-	local instance = {
-    selectedText = nil,
-    selectedTextLabel = nil, -- class
-    selectedIndex = 1,
-    selectedObj = nil,
-    objs = {},
-    model = model
-  }
-	return setmetatable(instance, {__index=self})
-end
 
 return M

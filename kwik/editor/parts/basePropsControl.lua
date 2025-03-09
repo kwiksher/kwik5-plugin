@@ -354,6 +354,31 @@ local function tapListenerAction(event)
   -- obj:addEventListener("mouse", mouseHandler)
 end
 
+
+local function tapListenerGotoEffect(event)
+  local selector = require(kwikGlobal.ROOT.."editor.picker.gotoSceneEffect")
+  local actionCommandPropsTable = require(kwikGlobal.ROOT.."editor.action.actionCommandPropsTable")
+  local listener = function(name)
+    print(name)
+    actionCommandPropsTable:setActiveProp(name)
+    selector:destroy()
+  end
+  selector:create(listener)
+  -- filters:show()
+end
+
+local function tapListenerGotoName(event)
+  local selector = require(kwikGlobal.ROOT.."editor.picker.gotoScenePageName")
+  local actionCommandPropsTable = require(kwikGlobal.ROOT.."editor.action.actionCommandPropsTable")
+  local listener = function(name)
+    print(name)
+    actionCommandPropsTable:setActiveProp(name)
+    selector:destroy()
+  end
+  selector:create(listener)
+  -- filters:show()
+end
+
 -- used in actionCommandPropsStore:listener
 M.CommandForTapSet = table:mySet {"audio", "group", "timer", "variable", "action"}
 --
@@ -369,7 +394,10 @@ M.handler = {
   variable = tapListenerVariable,
   boundaries = tapListenerShape,
   easing = tapListenerEasing,
-  filters = tapListenerFilters
+  filters = tapListenerFilters,
+  pageEffect = tapListenerGotoEffect, -- gotoPage in page action
+  pageName = tapListenerGotoName -- gotoPage in page action
+
 }
 
 function M.buttonContextListener(name, actionbox)

@@ -138,6 +138,20 @@ function M:create(UI)
         else -- layer
           obj:addEventListener("tap", function(event) basePropsControl.handler.layer(event) end)
         end
+      elseif entry.name == "pageName" then -- this is gotoScene, command: "page.pageName"
+        -- M.activeProp = entry.name
+        print("commandbox.command", commandbox.command)
+        obj:addEventListener("tap", function(event)
+          M.activeProp = event.target.text
+          basePropsControl.handler["pageName"](event)
+        end)
+      elseif entry.name == "effect" then -- this is gotoScene, command: "page.effect"
+        -- M.activeProp = entry.name
+        print("commandbox.command", commandbox.command)
+        obj:addEventListener("tap", function(event)
+          M.activeProp = event.target.text
+          basePropsControl.handler["pageEffect"](event)
+        end)
       elseif entry.name == "alpha" then
         alphaObj = obj
       elseif entry.name == "color" then
@@ -229,7 +243,9 @@ function M:setActiveProp(layer, class)
   -- print("@@@@", activeCommandName)
   -- animation.play, animation.pause, animation.resume
   local isValid = function(class)
-    if activeCommandName == "animation"  then
+    if activeCommandName == "page" and self.activeProp == "effect"  or self.activeProp == "pageName" then
+      return true
+    elseif activeCommandName == "animation"  then
       return Animation[class]
     elseif Layer_Class[activeCommandName] then
       return activeCommandName == class
