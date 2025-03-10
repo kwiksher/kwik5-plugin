@@ -298,7 +298,8 @@ function M.new(Props)
               timer.cancel(v)
             end
             for i, v in next, self.scene.UI.animations do
-              v:pause()
+              if v.to then v.to:pause() end
+              if v.from then v.from:pause() end
             end
             self.scene.UI.editor:destroy()
         end

@@ -227,24 +227,24 @@ function M:useClassEditorProps(UI)
     for i=1, #AB do
       if AB[i].name == "x" or AB[i].name == "y" then
         if AB[i].A:len() > 0 then
-          props.from[AB[i].name] = tonumber(AB[i].A )
+          props.from[AB[i].name] = tonumber(AB[i].A ) or "nil"
         else
           props.from[AB[i].name] = "nil"
         end
         if AB[i].B:len() > 0 then
-          props.to[AB[i].name] = tonumber(AB[i].B )
+          props.to[AB[i].name] = tonumber(AB[i].B ) or "nil"
         else
           props.from[AB[i].name] =  "nil"
         end
       else
         if AB[i].A:len() > 0 then
-          props.from[AB[i].name] = tonumber(AB[i].A )
+          props.from[AB[i].name] = tonumber(AB[i].A ) or "nil"
         else
           props.from[AB[i].name] = "nil"
         end
         --
         if AB[i].B:len() > 0 then
-          props.to[AB[i].name] = tonumber(AB[i].B )
+          props.to[AB[i].name] = tonumber(AB[i].B ) or "nil"
         else
           props.to[AB[i].name] = "nil"
         end

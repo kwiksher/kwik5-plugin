@@ -48,7 +48,7 @@ function M:create(UI)
         sheetContentHeight = 124  -- height of original 1x size of entire sheet
     }
 
-    local imageSheet = graphics.newImageSheet( "assets/images/easing/easing-"..k..".png", options )
+    local imageSheet = graphics.newImageSheet(kwikGlobal.PATH.. "assets/images/easing/easing-"..k..".png", options )
 
     for i, name in next, v do
       option.x = self.x + self.width*i + 10

@@ -162,13 +162,17 @@ local function createOptions(self, UI)
     options.breadW = self.breadcrumbs.width
     options.breadH = self.breadcrumbs.height
     if self.breadcrumbs.color then
-      local values = util.split(self.breadcrumbs.color, ",")
-      options.breadColor = {
-        tonumber(values[1]) / 255,
-        tonumber(values[2]) / 255,
-        tonumber(values[3]) / 255,
-        tonumber(values[4])
-      }
+      if type(self.breadcrumbs.color) == "string" then
+        local values = util.split(self.breadcrumbs.color, ",")
+        options.breadColor = {
+          tonumber(values[1]) / 255,
+          tonumber(values[2]) / 255,
+          tonumber(values[3]) / 255,
+          tonumber(values[4])
+        }
+      else
+        options.breadColor = self.breadcrumbs.color
+      end
     else
       options.breadColor = {"rand"}
     end

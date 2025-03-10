@@ -53,7 +53,7 @@ function M:init(UI)
   classProps.model = model.props
   classProps.type  = current
 
-  breadcrumbsProps   : init(UI, self.x + self.width, self.y+235,  self.width, self.height)
+  breadcrumbsProps   : init(UI, self.x + self.width, self.y+248,  self.width, self.height)
   breadcrumbsProps.model = model.breadcrumbs
   -- as same position as breadcrumbs
   filterProps   : init(UI, self.x + self.width-12, self.y+240,  self.width+30, self.height)
