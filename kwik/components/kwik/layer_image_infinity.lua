@@ -12,8 +12,8 @@ local function infinityBackHandler(self, event)
   -- if count > 10 then return end
   --
   if (props.direction == "left") then --horizontal loop
-    if self.x < self.oriX  + self.width/2  then
-      self.x = self.oriX
+    if self.x < display.contentCenterX - self.width/2 - self.width then
+      self.x = display.contentCenterX + self.width/2
     else
       self.x = self.x - props.speed
     end
@@ -24,16 +24,16 @@ local function infinityBackHandler(self, event)
       self.x = self.x + props.speed
     end
   elseif (props.direction == "up") then --vertical loop
-    if self.y < self.oriY  + self.height/2  then
-      self.y = self.oriY
+    if self.y < display.contentCenterY - self.height/2 - self.height then
+      self.y = display.contentCenterY + self.height/2
     else
       self.y = self.y - props.speed
     end
   elseif (props.direction == "down") then --vertical loop
-    if self.y > self.oriY  + self.height/2  then
-      self.y = self.oriY
+    if self.y > display.contentCenterY + self.height/2 then
+      self.y = display.contentCenterY - self.height - self.height/2
     else
-      self.y = self.y - props.speed
+      self.y = self.y + props.speed  -- Changed from - to + for downward movement
     end
   end
   --[[
