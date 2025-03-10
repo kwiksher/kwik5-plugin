@@ -498,6 +498,15 @@ function M:initAnimation(UI, layer, _onEndHandler)
 
   self.layerOptions = self.layerOptions or {}
   local referencePoint = self.layerOptions.referencePoint
+
+  if referencePoint == "Center" then
+    layer.anchorX = 0.5
+    layer.anchorY = 0.5
+    util.repositionAnchor(layer, 0.5, 0.5)
+
+
+
+  end
   if referencePoint == "TopLeft" then
     layer.anchorX = 0
     layer.anchorY = 0

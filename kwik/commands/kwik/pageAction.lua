@@ -68,7 +68,7 @@ function M:gotoPage(pageName, effect, delay, duration)
       --    composer.removeScene("views.page0"..pnum.."Scene", true)
       -- end
       if effect and effect ~="" then
-         options =  { effect = effect,  time= duration}
+         options =  { effect = effect,  time= duration*1000}
       end
       -- print(debug.traceback())
       app:showView("components."..scene..".index", options)
